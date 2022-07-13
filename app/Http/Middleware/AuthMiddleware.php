@@ -16,6 +16,10 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $isLogin = true;
+        if(!$isLogin){
+            dd('Vui long dang nhap');
+        }
         return $next($request);
     }
 }

@@ -1,0 +1,25 @@
+body {
+    max-width: 60%;
+    border-style: ridge;
+    margin: auto;
+}
+.header{
+    text-transform: uppercase;
+    height: 32px;
+    line-height: 32px;
+    background-color: rgb(234, 231, 228);
+}
+.header-left{
+    width: 30%;
+    height: 50%;
+    float: left;
+    text-align: center;
+
+}
+
+.header-right{
+    width: 70%;
+    height: min-content;
+    float: right;
+    text-align: center;
+}

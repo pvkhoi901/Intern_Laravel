@@ -21,6 +21,8 @@ Route::get('/', function () {
 });
  
 Route::get('/user', [UserController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->middleware('login');
+Route::get('/userList', [UserController::class, 'list']);  
+
 
 
