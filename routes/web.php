@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +14,7 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::prefix('admin')->group(function(){
+    Route::resource('user', UserController::class);
 });
- 
-Route::get('/createUser', [UserController::class, 'create'])->name('createUser');
-Route::get('/listUser', [UserController::class, 'list'])->name('listUser');
-
-
-
-
