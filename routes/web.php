@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
  
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index'])->middleware('login');
-Route::get('/userList', [UserController::class, 'list']);  
+Route::get('/createUser', [UserController::class, 'create'])->name('createUser');
+Route::get('/listUser', [UserController::class, 'list'])->name('listUser');
+
 
 
 

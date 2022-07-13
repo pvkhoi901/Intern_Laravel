@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\User\CreateUserRequest;
 
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(){
-        return view('userList');
+    
+    public function create(CreateUserRequest $request){
+
+        return view('createUser');
     }
     public function list(){
-        return view('users.list');
+        return view('listUser');
     }
+
 }
