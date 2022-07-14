@@ -18,12 +18,12 @@
                     <ul> 
                         <h3>System</h3>
                         <li><a href="{{route('user.index')}}">User management</a></li>
-                        <li><a href="">Role management</a></li>
-                        <li><a href="">Permission management</a></li>
+                        <li><a href="{{route('role.index')}}">Role management</a></li>
+                        <li><a href="{{route('category.index')}}">Permission management</a></li>
                     </ul>
                     <ul> 
                         <h3>Catalog</h3>   
-                        <li><a href="">Product management</a></li>
+                        <li><a href="{{route('product.index')}}">Product management</a></li>
                         <li><a href="">Category management</a></li>
                     </ul>
                 </div>
@@ -37,23 +37,23 @@
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
                             <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Nhập tên">
-                            @if ($errors->has('name'))
-                                <span class="text-danger text-left">{{ $errors->first('name') }}</span>
-                            @endif
+                            @error('name')
+                                <span style = "color: red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Email</label>
                             <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập email của bạn">
-                            @if ($errors->has('email'))
-                                <span class="text-danger text-left">{{ $errors->first('name') }}</span>
-                            @endif
+                            @error('email')
+                                <span style = "color: red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Password</label>
                             <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Nhập password">
-                            @if ($errors->has('password'))
-                                <span class="text-danger text-left">{{ $errors->first('name') }}</span>
-                            @endif
+                            @error('password')
+                                <span style = "color: red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Password confirm</label>
@@ -66,10 +66,16 @@
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Facebook</label>
                             <input type="email" name="facebook" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
+                            @error('facebook')
+                                <span style = "color: red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Youtobe</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
+                            <label for="exampleFormControlInput1" class="form-label">Youtube</label>
+                            <input type="email" name="youtube" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
+                            @error('youtube')
+                                <span style = "color: red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Descripion</label>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidateUsername;
 
 class UserRequest extends FormRequest
 {
@@ -24,7 +25,12 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|not_regex:/^[@#$%&*]/',
+            'name' => [
+                'required',
+                'min:2',
+                'not_regex:/^[@#$%&*]/',
+                new ValidateUserName(),
+            ],
             'email' => 'required|email|not_regex:/^[root]/',
             'password' => 'required|min:8',
             'facebook' => 'url',
