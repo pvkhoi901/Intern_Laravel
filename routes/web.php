@@ -6,6 +6,8 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\SessionController;
+
 
 
 /*
@@ -26,5 +28,10 @@ Route::prefix('admin')->group(function(){
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
+
+});
+Route::prefix('session')->group(function(){
+    Route::get('/', [SessionController::class, 'index']);
+    Route::get('/about', [SessionController::class, 'about']);
 
 });
