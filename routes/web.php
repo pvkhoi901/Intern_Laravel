@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Category\CategoryController;
 
 
 /*
@@ -16,11 +19,12 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::prefix('admin')->group(function(){
+    Route::resource('user', UserController::class);
+    Route::resource('role', RoleController::class);
+    Route::resource('permission', PermissionController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('category', CategoryController::class);
+
 });
- 
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
-
-
