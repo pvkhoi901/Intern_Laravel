@@ -15,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        $info = session()->get('user');
+        return view('admin.user.index',[
+            'info'=> $info,
+        ]);
     }
 
     /**
@@ -36,10 +39,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = $request->all();
-        $collection = collect($user);
-        Session::push('user', $collection);
-        dd(Session::all());
+        Session::push('user', collect($request->all()));
+        return redirect()->route('user.index');
         
     }
     

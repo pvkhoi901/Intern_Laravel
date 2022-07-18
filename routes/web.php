@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
-    Route::resource('mail', MailController::class);
+    Route::resource('mails', MailController::class);
 
 });
 Route::prefix('session')->group(function(){

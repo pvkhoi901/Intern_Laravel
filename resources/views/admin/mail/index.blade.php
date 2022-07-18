@@ -36,8 +36,10 @@
                         @csrf
                         <div class="col-md-12 mb-3">
                             <select name="mail" class="form-control" style="margin-top: 20px;">
-                                foreach($)
-                                <option value="">Select a user</option>
+                                <option>Select a user</option>
+                                @foreach($info as $key=>$value)
+                                <option value="">{{$value['name']}}</option>
+                                @endforeach
                             </select>
                         </div>
                         

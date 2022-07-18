@@ -30,7 +30,7 @@
             <div>
                 <h1>UserList</h1>                
                 <a href="{{route('user.create')}}" class="btn btn-new" style="margin-left: 8px;" >+Addnew</a>
-                <a href="{{route('mail.index')}}" class="btn btn-new">Send Mail</a>
+                <a href="{{route('mails.index')}}" class="btn btn-new">Send Mail</a>
             </div>
             <table class="table">
                 <thead>
@@ -42,32 +42,13 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach(session()->get('user') as $key=>$value)
                   <tr>
                     <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
-                    <td>Aza</td>
-                    <td>Aza@gmail.com</td>
+                    <td>{{$value['name']}}</td>
+                    <td>{{$value['email']}}</td>
                     <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png"alt=""></td>
-                    <td>Thorn</td>
-                    <td>Thorn@gmail.com</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=></td>
-                    <td>Wish</td>
-                    <td>Wish@gmail.com</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
-                    <td>Aya</td>
-                    <td>Aya@gmail.com</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
-                    <td>Home</td>
-                    <td>Home@gmail.com</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
+                  @endforeach
 
                 </tbody>
               </table>
