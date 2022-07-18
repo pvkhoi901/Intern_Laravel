@@ -42,7 +42,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach(session()->get('user') as $key=>$value)
+                  @foreach($info as $key=>$value)
                   <tr>
                     <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
                     <td>{{$value['name']}}</td>
