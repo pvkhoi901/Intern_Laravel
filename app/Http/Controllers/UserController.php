@@ -15,10 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $info = session()->get('user');
-        return view('admin.user.index',[
-            'info'=> $info,
-        ]);
+        return view('admin.user.index');
     }
 
     /**

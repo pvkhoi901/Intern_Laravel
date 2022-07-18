@@ -14,7 +14,10 @@ class MailController extends Controller
      */
     public function index()
     {
-        return view('admin.mail.index');
+        $info = session()->get('user');
+        return view('admin.mail.index', [
+            'info'=> $info,
+        ]);
     }
 
     /**
