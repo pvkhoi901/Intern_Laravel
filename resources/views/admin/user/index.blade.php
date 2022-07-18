@@ -28,8 +28,9 @@
                 </div>
         <div class="col-md-9">
             <div>
-                <h1>UserList</h1>
-                <a href="{{route('user.create')}}" class="btn btn-new">+Addnew</a>
+                <h1>UserList</h1>                
+                <a href="{{route('user.create')}}" class="btn btn-new" style="margin-left: 8px;" >+Addnew</a>
+                <a href="{{route('mail.index')}}" class="btn btn-new">Send Mail</a>
             </div>
             <table class="table">
                 <thead>

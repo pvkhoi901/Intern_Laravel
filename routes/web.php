@@ -7,6 +7,7 @@ use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\Mail\MailController;
 
 
 
@@ -28,6 +29,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('mail', MailController::class);
 
 });
 Route::prefix('session')->group(function(){

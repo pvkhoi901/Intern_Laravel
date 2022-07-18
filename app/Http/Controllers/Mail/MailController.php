@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Http\Requests\User\UserRequest;
+namespace App\Http\Controllers\Mail;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class UserController extends Controller
+class MailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        return view('admin.mail.index');
     }
 
     /**
@@ -25,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.form');
+        //
     }
 
     /**
@@ -34,15 +33,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $user = $request->all();
-        $collection = collect($user);
-        Session::push('user', $collection);
-        dd(Session::all());
-        
+        //
     }
-    
+
     /**
      * Display the specified resource.
      *
