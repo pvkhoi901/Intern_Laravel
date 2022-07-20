@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nhập Address">
+                            <input name="address" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nhập Address">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Facebook</label>

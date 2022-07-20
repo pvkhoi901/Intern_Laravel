@@ -31,6 +31,7 @@ class UserRequest extends FormRequest
                 'not_regex:/^[@#$%&*]/',
                 new ValidateUserName(),
             ],
+            'address' => '',
             'email' => 'required|email|not_regex:/^[root]/',
             'password' => 'required|min:8',
             'facebook' => 'url',

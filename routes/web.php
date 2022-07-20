@@ -29,7 +29,10 @@ Route::prefix('admin')->group(function(){
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
-    Route::resource('mails', MailController::class);
+    Route::get('/formSendMail', [UserController::class, 'formSendMail'])->name('formSendMail');
+    Route::post('/send', [UserController::class, 'sendMailUserProfile'])->name('send');
+
+    
 
 });
 Route::prefix('session')->group(function(){
