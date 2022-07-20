@@ -6,6 +6,9 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\Mail\MailController;
+
 
 
 /*
@@ -26,5 +29,14 @@ Route::prefix('admin')->group(function(){
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
+    Route::get('/formSendMail', [UserController::class, 'formSendMail'])->name('formSendMail');
+    Route::post('/send', [UserController::class, 'sendMailUserProfile'])->name('send');
+
+    
+
+});
+Route::prefix('session')->group(function(){
+    Route::get('/', [SessionController::class, 'index']);
+    Route::get('/about', [SessionController::class, 'about']);
 
 });

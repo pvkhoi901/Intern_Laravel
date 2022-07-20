@@ -43,36 +43,36 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập email của bạn">
+                            <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập email của bạn">
                             @error('email')
                                 <span style = "color: red;">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Nhập password">
+                            <input type="password" name ="password" class="form-control" id="exampleFormControlInput1" placeholder="Nhập password">
                             @error('password')
                                 <span style = "color: red;">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Password confirm</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập lại password">
+                            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Nhập lại password">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập Address">
+                            <input name="address" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nhập Address">
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Facebook</label>
-                            <input type="email" name="facebook" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
+                            <input type="text" name="facebook" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
                             @error('facebook')
                                 <span style = "color: red;">{{$message}}</span>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Youtube</label>
-                            <input type="email" name="youtube" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
+                            <input type="text" name="youtube" class="form-control" id="exampleFormControlInput1" placeholder="http://example.com">
                             @error('youtube')
                                 <span style = "color: red;">{{$message}}</span>
                             @enderror
