@@ -33,6 +33,9 @@ class InformUserProfile extends Mailable
      */
     public function build()
     {
+        if($this->filename == '/'){
+            return $this->view('mails.admin.users.inform-user-profile', ['user'=> $this->user]);
+        }
         return $this->view('mails.admin.users.inform-user-profile', ['user'=> $this->user])->attach($this->filename);
     }
 }

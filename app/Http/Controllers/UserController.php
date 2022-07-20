@@ -30,19 +30,25 @@ class UserController extends Controller
 
         $path = public_path('uploads');
         $attachment = $request->file('attachment');
-        $name = time().'.'.$attachment->getClientOriginalExtension();
-        if(!File::exists($path)) {
-            File::makeDirectory($path, $mode = 0777, true, true);
+
+        if(!empty($attachment)) {
+            $name = time().'.'.$attachment->getClientOriginalExtension();
+
+            if(!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+            $attachment->move($path, $name);
+
+            $filename = $path.'/'.$name;
+
+            foreach ($users as $user) {
+                $this->mailService->sendUserProfile($user, $filename);
+            }
+        }else {
+            foreach ($users as $user) {
+                $this->mailService->sendUserProfile($user, $filename='/');
+            }
         }
-        $attachment->move($path, $name);
-
-        $filename = $path.'/'.$name;
-
-        foreach ($users as $user)
-        {
-            $this->mailService->sendUserProfile($user, $filename);
-        }
-
         
         return redirect()->back()->with('message', 'Gửi mail thành công');
 
