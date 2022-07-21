@@ -21,7 +21,7 @@ class PermissionRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    
+
     public function rules()
     {
         return [
@@ -38,5 +38,4 @@ class PermissionRequest extends FormRequest
             'permission.required' => 'Không được bỏ trống',
         ];
     }
-
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\ProductRequest;
 
-
 class ProductController extends Controller
 {
     /**
@@ -37,7 +36,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        
     }
 
     /**

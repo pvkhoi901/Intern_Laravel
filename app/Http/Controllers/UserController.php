@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\User\UserRequest;
 
 use Illuminate\Http\Request;
@@ -31,10 +32,10 @@ class UserController extends Controller
         $path = public_path('uploads');
         $attachment = $request->file('attachment');
 
-        if(!empty($attachment)) {
+        if (!empty($attachment)) {
             $name = time().'.'.$attachment->getClientOriginalExtension();
 
-            if(!File::exists($path)) {
+            if (!File::exists($path)) {
                 File::makeDirectory($path, $mode = 0777, true, true);
             }
             $attachment->move($path, $name);
@@ -44,25 +45,25 @@ class UserController extends Controller
             foreach ($users as $user) {
                 $this->mailService->sendUserProfile($user, $filename);
             }
-        }else {
+        } else {
             foreach ($users as $user) {
                 $this->mailService->sendUserProfile($user, $filename='/');
             }
         }
-        
-        return redirect()->back()->with('message', 'Gửi mail thành công');
 
+        return redirect()->back()->with('message', 'Gửi mail thành công');
     }
 
     public function index()
     {
         $users = session()->get('users');
-        return view('admin.user.index',[
+        return view('admin.user.index', [
             'users'=> $users,
         ]);
     }
 
-    public function formSendMail(){
+    public function formSendMail()
+    {
         $users = Session::get('users');
         return view('admin.mail.index', [
             'users'=> $users,
@@ -90,8 +91,5 @@ class UserController extends Controller
     {
         Session::push('users', $request->only(['name', 'email', 'phone', 'address']));
         return redirect()->route('user.index')->with('message', 'Thêm thành công');
-        
     }
-    
-    
 }

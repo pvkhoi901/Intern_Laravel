@@ -36,12 +36,12 @@ class UserRequest extends FormRequest
             'password' => 'required|min:8',
             'facebook' => 'url',
             'youtube' => 'url'
-            
+
         ];
     }
     public function messages()
-{
-    return [
+    {
+        return [
         'name.required' => 'Không được bỏ trống',
         'name.min' => 'Vui lòng nhập nhiều hơn 2 kí tự',
         'name.not_regex' => 'Không được nhập kí tự @, #, $, %, &, *',
@@ -50,7 +50,7 @@ class UserRequest extends FormRequest
         'facebook.url' => 'Phải đúng định dạng url',
         'youtube.url' => 'Phải đúng định dạng url',
 
-        
+
     ];
-}
+    }
 }

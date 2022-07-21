@@ -37,5 +37,4 @@ class ProductRequest extends FormRequest
             'description.required' => 'Không được bỏ trống',
         ];
     }
-    
 }

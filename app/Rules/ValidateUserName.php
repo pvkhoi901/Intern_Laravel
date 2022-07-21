@@ -11,7 +11,7 @@ class ValidateUserName implements Rule
      *
      * @return void
      */
-    
+
 
     /**
      * Determine if the validation rule passes.
