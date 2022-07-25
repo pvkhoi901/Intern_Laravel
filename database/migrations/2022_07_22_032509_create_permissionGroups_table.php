@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('permissionGroups', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('name', 255)->unique();
             $table->timestamps();
         });

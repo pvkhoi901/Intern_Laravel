@@ -13,10 +13,10 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('permissions', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('name', 255)->unique();
             $table->string('key', 255)->unique();
-            $table->integer('permission_group_id')->unique();
+            $table->unsignedInteger('permission_group_id')->unique();
             $table->foreign('permission_group_id')->references('id')->on('permissionGroups')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
