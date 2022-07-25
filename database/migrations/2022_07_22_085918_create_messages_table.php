@@ -13,15 +13,15 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->string('room', 255)->nullable();
-            $table->bigInteger('sender_id')->nullable();
+            $table->unsignedBigInteger('sender_id')->nullable();
             $table->string('sender_type', 255)->default();
-            $table->bigInteger('receiver_id')->unsigned();
+            $table->unsignedBigInteger('receiver_id')->unsigned();
             $table->string('receiver_type', 255);
             $table->text('content', 255);
             $table->string('content_type', 255)->default('text');
-            $table->integer('association_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('association_id')->unsigned()->nullable();
             $table->string('association_type', 255);
             $table->timestamps();
             $table->softDeletes();

@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('schools', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('code')->unique()->nullable();
