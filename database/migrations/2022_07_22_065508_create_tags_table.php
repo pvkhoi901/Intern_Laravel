@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->primary();
             $table->string('name')->unique();
             $table->timestamps();
             $table->softDeletes();

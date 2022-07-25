@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('schools', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->primary();
             $table->string('name')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('code')->unique()->nullable();
@@ -35,9 +35,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
