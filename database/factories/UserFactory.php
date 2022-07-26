@@ -1,11 +1,11 @@
 <?php
 
 namespace Database\Factories;
+
 use App\Models\School;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -21,7 +21,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->safeEmail(),
+            'email' => fake()->freeEmail(),
             'username' => fake()->username(),
             'password' => fake()->password(),
             'address' => fake()->sentence(),

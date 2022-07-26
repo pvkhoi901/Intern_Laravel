@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
+use App\Models\PermissionGroup;
 
 use Illuminate\Database\Seeder;
 
-class RoleSeeder extends Seeder
+class PermissionGroupSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::factory()->count(15)->create();
+        PermissionGroup::factory()->count(22)->create();
     }
 }
