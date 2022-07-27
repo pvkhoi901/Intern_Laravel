@@ -33,3 +33,7 @@ Route::prefix('session')->group(function () {
     Route::get('/', [SessionController::class, 'index']);
     Route::get('/about', [SessionController::class, 'about']);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

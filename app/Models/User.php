@@ -12,6 +12,8 @@ class User extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -25,5 +27,10 @@ class User extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
     }
 }
