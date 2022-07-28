@@ -5,12 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
-    use HasFactory;
+    use AuthenticableTrait;
     use SoftDeletes;
+    use Notifiable;
+
+    const TYPES = [
+        'admin' => 1,
+        'student' => 2,
+    ];
 
     protected $guarded = [];
 
@@ -29,8 +39,10 @@ class User extends Model
         return $this->morphToMany(Tag::class);
     }
 
-    public function setPasswordAttribute($value)
+    public function markEmailAsVerified()
     {
-        $this->attributes['password'] = bcrypt($value);
+        return $this->forceFill([
+            'verified_at' => $this->freshTimestamp(),
+        ])->save();
     }
 }

@@ -29,11 +29,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/formSendMail', [UserController::class, 'formSendMail'])->name('formSendMail');
     Route::post('/send', [UserController::class, 'sendMailUserProfile'])->name('send');
 });
-Route::prefix('session')->group(function () {
-    Route::get('/', [SessionController::class, 'index']);
-    Route::get('/about', [SessionController::class, 'about']);
-});
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+Route::get('/', function () {
+    return redirect('/home');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
