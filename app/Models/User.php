@@ -38,6 +38,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->morphToMany(Tag::class);
     }
+    public function isAdmin()
+    {
+        return $this->type == self::TYPES['admin'];
+    }
+
+    public function isStudent()
+    {
+        return $this->type == self::TYPES['student'];
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return ! is_null($this->verified_at);
+    }
 
     public function markEmailAsVerified()
     {

@@ -20,7 +20,7 @@ use App\Http\Controllers\SessionController;
 */
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'admin.verify'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
