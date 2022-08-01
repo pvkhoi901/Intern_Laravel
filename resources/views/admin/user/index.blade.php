@@ -23,7 +23,7 @@
                     <ul> 
                         <h3>Catalog</h3>   
                         <li><a href="{{route('product.index')}}">Product management</a></li>
-                        <li><a href="">Category management</a></li>
+                        <li><a href="{{route('category.index')}}">Category management</a></li>
                     </ul>
                 </div>
         <div class="col-md-9">
