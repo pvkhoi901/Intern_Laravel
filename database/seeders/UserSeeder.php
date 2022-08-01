@@ -6,7 +6,6 @@ use App\Models\User;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class UserSeeder extends Seeder
 {
@@ -27,6 +26,5 @@ class UserSeeder extends Seeder
             'school_id' => null,
         ])->create();
         User::factory()->count(5)->create();
-           
     }
 }

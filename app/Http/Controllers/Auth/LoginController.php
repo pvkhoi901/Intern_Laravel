@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 use App\Http\Requests\Login\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,13 +48,17 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        
-        if ($this->attemptLogin($request)) {
-            return redirect($this->redirectPath());
+        $credentials = $request->getCredentials();
+
+        if (!Auth::attempt($credentials)) {
+            return back()->with(
+                'loginFailed',
+                'The provided credentials do not match our records.',
+            );
         }
 
-        return redirect()->route('login')->with('message', 'Đăng nhập chưa thành công');
+        $request->session()->regenerate();
+
+        return redirect($this->redirectPath());
     }
-
 }
-

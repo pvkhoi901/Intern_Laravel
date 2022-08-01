@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -17,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
     use Notifiable;
 
-    const TYPES = [
+    public const TYPES = [
         'admin' => 1,
         'student' => 2,
     ];

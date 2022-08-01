@@ -24,15 +24,21 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ];
     }
-    public function messages()
+    public function getCredentials()
     {
-        return [
-            'email.required' => 'Không được bỏ trống',
-            'password.required' => 'Không được bỏ trống',
-        ];
+        $credential = $this->validated();
+
+        if (filter_var($credential['username'], FILTER_VALIDATE_EMAIL)) {
+            return [
+                'email' => $credential['username'],
+                'password' => $credential['password']
+            ];
+        }
+
+        return $credential;
     }
 }
