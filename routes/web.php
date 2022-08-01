@@ -6,7 +6,6 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
-use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +19,7 @@ use App\Http\Controllers\SessionController;
 */
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'admin.verify'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
@@ -29,7 +28,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/formSendMail', [UserController::class, 'formSendMail'])->name('formSendMail');
     Route::post('/send', [UserController::class, 'sendMailUserProfile'])->name('send');
 });
-Route::prefix('session')->group(function () {
-    Route::get('/', [SessionController::class, 'index']);
-    Route::get('/about', [SessionController::class, 'about']);
+
+Auth::routes(['verify' => true]);
+Route::get('/', function () {
+    return redirect('/home');
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
