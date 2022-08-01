@@ -6,6 +6,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
+                @if (Session::has('loginFailed'))
+                        <span class="alert alert-warning help-block">
+                            <strong>{{ session('loginFailed') }}</strong>
+                        </span>
+                    @endif
                 @if (session('status'))
                         <span class="alert alert-warning help-block">
                             <strong>{{ session('status') }}</strong>

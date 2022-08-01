@@ -21,7 +21,7 @@ class AdminVerifyMiddleware
             return redirect()->route('login');
         }
 
-        if (Auth::user()->type == 1) {
+        if (Auth::user()->isAdmin()) {
             return $next($request);
         }
 

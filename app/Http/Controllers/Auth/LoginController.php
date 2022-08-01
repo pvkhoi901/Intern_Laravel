@@ -53,7 +53,7 @@ class LoginController extends Controller
         if (!Auth::attempt($credentials)) {
             return back()->with(
                 'loginFailed',
-                'The provided credentials do not match our records.',
+                'Thông tin đăng nhập không chính xác',
             );
         }
 
