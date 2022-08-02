@@ -6,6 +6,7 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\PermissionGroup\PermissionGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin.verify'])->group(
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('permission-group', PermissionGroupController::class);
     Route::get('/formSendMail', [UserController::class, 'formSendMail'])->name('formSendMail');
     Route::post('/send', [UserController::class, 'sendMailUserProfile'])->name('send');
 });
