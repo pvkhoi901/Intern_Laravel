@@ -53,13 +53,7 @@ class PermissionGroupController extends Controller
      */
     public function show($id)
     {
-        if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
-            abort(404);
-        }
-
-        return view('admin.permission-group.show', [
-            'permissionGroup' => $permissionGroup,
-        ]);
+        
     }
 
     /**

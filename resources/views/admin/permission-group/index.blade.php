@@ -23,7 +23,6 @@
                             <td>{{$per['name']}}</td>
                             <td>
                                 <a href="{{route('permission-group.edit', $per->id)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{route('permission-group.show', $per->id)}}" class="btn btn-success"> Show </a>
                                 <form class="d-inline" method="post" action="{{ route('permission-group.destroy', $per->id) }}">
                                     @csrf
                                     @method('DELETE')
@@ -36,27 +35,6 @@
                     </tr>
                 </tbody>
               </table>
-                    
+              {{ $permissionGroup->links() }}
 @endsection
 
-@section('page-navigation')
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-    </nav>
-@endsection
