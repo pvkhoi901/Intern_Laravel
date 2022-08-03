@@ -40,7 +40,7 @@ class PermissionGroupController extends Controller
      */
     public function store(PermissionGroupRequest $request)
     {
-        $this->permissionGroupRepository->save($request->only(['name', 'created_at', 'updated_at']));
+        $this->permissionGroupRepository->save($request->validated());
 
         return redirect()->route('permission-group.index');
     }
@@ -56,6 +56,7 @@ class PermissionGroupController extends Controller
         if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
             abort(404);
         }
+
         return view('admin.permission-group.show', [
             'permissionGroup' => $permissionGroup,
         ]);
@@ -72,6 +73,7 @@ class PermissionGroupController extends Controller
         if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
             abort(404);
         }
+
         return view('admin.permission-group.form', [
             'permissionGroup' => $permissionGroup,
         ]);
@@ -86,7 +88,7 @@ class PermissionGroupController extends Controller
      */
     public function update(PermissionGroupRequest $request, $id)
     {
-        $this->permissionGroupRepository->save($request->only(['name', 'created_at', 'updated_at']), ['id' => $id]);
+        $this->permissionGroupRepository->save($request->validated(), ['id' => $id]);
 
         return redirect()->route('permission-group.index');
     }

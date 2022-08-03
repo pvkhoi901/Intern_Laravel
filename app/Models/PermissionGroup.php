@@ -11,7 +11,6 @@ class PermissionGroup extends Model
 
     protected $guarded = [];
 
-
     public function permissions()
     {
         return $this->hasMany(Permission::class);
