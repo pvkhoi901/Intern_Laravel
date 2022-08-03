@@ -3,6 +3,7 @@
 namespace App\Http\Requests\PermissionGroup;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PermissionGroupRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class PermissionGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => ['required', Rule::unique('permission_groups')->ignore($this->permission_group)],
         ];
     }
 }

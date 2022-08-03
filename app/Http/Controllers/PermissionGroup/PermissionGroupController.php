@@ -8,7 +8,7 @@ use App\Repositories\Admin\PermissionGroup\PermissionGroupRepository;
 
 class PermissionGroupController extends Controller
 {
-    private $permissionGroupRepository;
+    protected $permissionGroupRepository;
 
     public function __construct(PermissionGroupRepository $permissionGroupRepository)
     {
@@ -17,9 +17,8 @@ class PermissionGroupController extends Controller
 
     public function index()
     {
-        $permissionGroup = $this->permissionGroupRepository->paginate();
         return view('admin.permission-group.index', [
-            'permissionGroup' => $permissionGroup,
+            'permissionGroup' => $this->permissionGroupRepository->paginate(),
         ]);
     }
 
@@ -30,7 +29,7 @@ class PermissionGroupController extends Controller
      */
     public function create()
     {
-        return view('admin.permission-group.create');
+        return view('admin.permission-group.form');
     }
 
     /**
@@ -41,7 +40,7 @@ class PermissionGroupController extends Controller
      */
     public function store(PermissionGroupRequest $request)
     {
-        $this->permissionGroupRepository->save($request->all());
+        $this->permissionGroupRepository->save($request->only(['name', 'created_at', 'updated_at']));
 
         return redirect()->route('permission-group.index');
     }
@@ -54,7 +53,9 @@ class PermissionGroupController extends Controller
      */
     public function show($id)
     {
-        $permissionGroup = $this->permissionGroupRepository->findById($id);
+        if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
+            abort(404);
+        }
         return view('admin.permission-group.show', [
             'permissionGroup' => $permissionGroup,
         ]);
@@ -68,9 +69,10 @@ class PermissionGroupController extends Controller
      */
     public function edit($id)
     {
-        $permissionGroup = $this->permissionGroupRepository->findById($id);
-
-        return view('admin.permission-group.edit', [
+        if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
+            abort(404);
+        }
+        return view('admin.permission-group.form', [
             'permissionGroup' => $permissionGroup,
         ]);
     }
@@ -84,7 +86,7 @@ class PermissionGroupController extends Controller
      */
     public function update(PermissionGroupRequest $request, $id)
     {
-        $this->permissionGroupRepository->save($request->all(), ['id' => $id]);
+        $this->permissionGroupRepository->save($request->only(['name', 'created_at', 'updated_at']), ['id' => $id]);
 
         return redirect()->route('permission-group.index');
     }

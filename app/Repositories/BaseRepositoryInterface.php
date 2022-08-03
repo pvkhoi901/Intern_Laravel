@@ -4,11 +4,9 @@ namespace App\Repositories;
 
 interface BaseRepositoryInterface
 {
-    // public function all();
-
     public function paginate(array $input = [], $perPage = 10);
 
-    public function save(array $inputs, array $conditons = []);
+    public function save(array $inputs, array $conditions = []);
 
     public function findById($id);
 
