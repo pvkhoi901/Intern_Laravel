@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->increments('id');
             $table->string('name', 255)->unique();
             $table->string('key', 255)->unique();
-            $table->unsignedInteger('permission_group_id')->unique();
+            $table->unsignedInteger('permission_group_id');
             $table->foreign('permission_group_id')->references('id')->on('permission_groups')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

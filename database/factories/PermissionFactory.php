@@ -21,7 +21,7 @@ class PermissionFactory extends Factory
         return [
             'name' => fake()->unique()->word(),
             'key' => fake()->unique()->word(),
-            'permission_group_id' => PermissionGroup::first()->id,
+            'permission_group_id' =>PermissionGroup::all()->random()->id
 
         ];
     }

@@ -9,6 +9,8 @@ class PermissionGroup extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function permissions()
     {
         return $this->hasMany(Permission::class);
