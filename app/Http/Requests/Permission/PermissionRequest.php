@@ -4,6 +4,7 @@ namespace App\Http\Requests\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+
 class PermissionRequest extends FormRequest
 {
     /**
@@ -42,6 +43,4 @@ class PermissionRequest extends FormRequest
             ],
         ];
     }
-    
-    
 }
