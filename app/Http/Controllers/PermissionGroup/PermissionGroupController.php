@@ -53,7 +53,6 @@ class PermissionGroupController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
