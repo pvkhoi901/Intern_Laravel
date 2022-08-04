@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class PermissionRequest extends FormRequest
 {
     /**
@@ -25,17 +25,23 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|not_regex:/^[@#$%&*]/',
-            'permission' => 'required',
+            'name' => [
+                'required',
+                Rule::unique('permissions')->ignore($this->permission),
+            ],
+            'key' => [
+                'required',
+                Rule::unique('permissions')->ignore($this->permission),
+            ],
+            'permission_group_id' => [
+                'required',
+                'numeric',
+                'min:0',
+                'not_in:0',
+                Rule::exists('permission_groups', 'id'),
+            ],
         ];
     }
-    public function messages()
-    {
-        return [
-            'name.required' => 'Không được bỏ trống',
-            'name.min' => 'Vui lòng nhập nhiều hơn 2 kí tự',
-            'name.not_regex' => 'Không được nhập kí tự @, #, $, %, &, *',
-            'permission.required' => 'Không được bỏ trống',
-        ];
-    }
+    
+    
 }
