@@ -41,7 +41,14 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        //
+        if (! $role = $this->roleRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.role.form', [
+            'role_show' => $role,
+            'permissionGroups_show' => $this->permissionGroupRepository->getAll(),
+        ]);
     }
 
     public function edit($id)

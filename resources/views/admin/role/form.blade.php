@@ -6,7 +6,11 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
+      @if(!empty($role_show))
+      <h3> Show role: </h3>
+      @else
       <h3> Create role: </h3>
+      @endif
 @else
 <form class="container-fluid" method="post" action="{{ route('role.update', $role->id) }}">
   @method('PUT')
@@ -20,6 +24,26 @@
       </a>
     </div>
   </div>
+@if(!empty($role_show))
+  
+  <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Role_name</th>
+              <th scope="col">Created_at</th>
+              <th scope="col">Updated_at</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{$role_show->name}}</td>
+              <td>{{$role_show['created_at']}}</td>
+              <td>{{$role_show['updated_at']}}</td>
+            </tr>
+          </tbody>
+    </table>
+    
+@else
   @if (!empty($role))
   <div class="container-fluid">
     <p class="form-label"> ID </p>
@@ -73,5 +97,6 @@
       </button>
     </div>
   </div>
+@endif
 </form>
 @endsection
