@@ -36,6 +36,7 @@
             <tr>
               <th scope="col">Id</th>
               <th scope="col">Role_name</th>
+              <th scope="col">Permission count</th>
               <th scope="col">Created_at</th>
               <th scope="col">Updated_at</th>
             </tr>
@@ -44,6 +45,7 @@
             <tr>
               <td>{{$role_show->id}}</td>
               <td>{{$role_show->name}}</td>
+              <td>{{$role_show->permissions->count()}}</td>
               <td>{{$role_show->created_at}}</td>
               <td>{{$role_show->updated_at}}</td>
             </tr>

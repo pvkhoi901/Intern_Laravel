@@ -17,7 +17,9 @@
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">Id</th>
       <th scope="col">Name</th>
+      <th scope="col">Permission Count</th>
       <th scope="col">Admin</th>
     </tr>
   </thead>
@@ -25,7 +27,9 @@
     @if(!empty($roles))
     @foreach($roles as $role)
     <tr>
-      <td>{{$role['name']}}</td>
+      <td>{{$role->id}}</td>
+      <td>{{$role->name}}</td>
+      <td>{{$role->permissions->count()}}</td>
       <td>
         <a href="{{route('role.edit', $role->id)}}" class="btn btn-primary">Edit</a>
         <a href="{{route('role.show', $role->id)}}" class="btn btn-success">Show</a>
@@ -33,7 +37,7 @@
         <form class="d-inline" method="post" action="{{ route('role.destroy', $role->id) }}">
           @csrf
           @method('DELETE')
-          <button type="submit" class="btn btn-danger"> Delete </button>
+          <button type="submit" class="btn btn-danger" > Delete </button>
         </form>
       </td>
     </tr>
