@@ -1,5 +1,15 @@
 @extends('layout.admin.master')
 @section('content')
+@if (Session::has('error'))
+<div class="alert alert-danger" role="alert">
+  {{ session('error') }}
+</div>
+@endif
+@if (Session::has('success'))
+<div class="alert alert-success" role="alert">
+  {{ session('success') }}
+</div>
+@endif
 <div>
   <h1>Role list</h1>
   <a href="{{route('role.create')}}" class="btn btn-new">+Addnew</a>

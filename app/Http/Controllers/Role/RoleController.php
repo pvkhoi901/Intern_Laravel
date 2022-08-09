@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\RoleRequest;
 use App\Repositories\Admin\Role\RoleRepository;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepository;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -28,15 +29,31 @@ class RoleController extends Controller
     public function create()
     {
         return view('admin.role.form', [
-            'permissionGroups' => $this->permissionGroupRepository->getAll(),
+            'permissionGroups' => $this->permissionGroupRepository->with('permissions')->get(),
         ]);
     }
 
     public function store(RoleRequest $request)
     {
-        $role = $this->roleRepository->save($request->validated());
-        $role->permissions()->sync($request->input('permission_ids'));
-        return redirect()->route('role.index');
+        DB::beginTransaction();
+
+        try {
+            $role = $this->roleRepository->save($request->validated());
+            $role->permissions()->sync($request->input('permission_ids'));
+            DB::commit();
+
+            return redirect()->route('role.index')->with(
+                'success',
+                'Created success'
+            );
+        } catch (\Exception) {
+            DB::rollback();
+
+            return redirect()->back()->with(
+                'error',
+                'Exception occured. Please try again later.'
+            );
+        }
     }
 
     public function show($id)
@@ -65,15 +82,44 @@ class RoleController extends Controller
 
     public function update(RoleRequest $request, $id)
     {
-        $role = $this->roleRepository->save($request->validated(), ['id' => $id]);
-        $role->permissions()->sync($request->input('permission_ids'));
+        DB::beginTransaction();
 
-        return redirect()->route('role.index');
+        try {
+            $role = $this->roleRepository->save($request->validated(), ['id' => $id]);
+            $role->permissions()->sync($request->input('permission_ids'));
+            DB::commit();
+
+            return redirect()->route('role.index')->with(
+                'success',
+                'Edit success'
+            );
+        } catch (\Exception) {
+            DB::rollback();
+
+            return redirect()->back();
+        }
     }
 
     public function destroy($id)
     {
-        $this->roleRepository->deleteById($id);
-        return redirect()->route('role.index');
+        DB::beginTransaction();
+
+        try {
+            $this->roleRepository->findById($id)->permissions()->detach();
+            $this->roleRepository->deleteById($id);
+            DB::commit();
+
+            return redirect()->route('role.index')->with(
+                'success',
+                'Deletion success'
+            );
+        } catch (\Exception) {
+            DB::rollback();
+
+            return redirect()->back()->with(
+                'error',
+                'Exception occured. Please try again later.'
+            );
+        }
     }
 }
