@@ -1,68 +1,49 @@
 @extends('layout.admin.master')
 @section('content')
-            <div>
-                <h1>Role list</h1>
-                <a href="{{route('role.create')}}" class="btn btn-new">+Addnew</a>
-            </div>
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Avatar</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Admin</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
-                    <td>Aza</td>
-                    <td>Leader</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png"alt=""></td>
-                    <td>Thorn</td>
-                    <td>Developer</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=></td>
-                    <td>Wish</td>
-                    <td>Developer</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
-                    <td>Aya</td>
-                    <td>Intern</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png" alt=""></td>
-                    <td>Home</td>
-                    <td>Intern</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
+@if (Session::has('error'))
+<div class="alert alert-danger" role="alert">
+  {{ session('error') }}
+</div>
+@endif
+@if (Session::has('success'))
+<div class="alert alert-success" role="alert">
+  {{ session('success') }}
+</div>
+@endif
+<div>
+  <h1>Role list</h1>
+  <a href="{{route('role.create')}}" class="btn btn-new">+Addnew</a>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Permission Count</th>
+      <th scope="col">Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if(!empty($roles))
+    @foreach($roles as $role)
+    <tr>
+      <td>{{$role->id}}</td>
+      <td>{{$role->name}}</td>
+      <td>{{$role->permissions->count()}}</td>
+      <td>
+        <a href="{{route('role.edit', $role->id)}}" class="btn btn-primary">Edit</a>
+        <a href="{{route('role.show', $role->id)}}" class="btn btn-success">Show</a>
 
-                </tbody>
-              </table>
-@endsection
-
-@section('page-navigation')
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-    </nav>
+        <form class="d-inline" method="post" action="{{ route('role.destroy', $role->id) }}">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger" > Delete </button>
+        </form>
+      </td>
+    </tr>
+    @endforeach
+    @endif
+  </tbody>
+</table>
+{{ $roles->links() }}
 @endsection
