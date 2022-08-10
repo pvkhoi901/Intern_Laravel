@@ -6,14 +6,14 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Create permission: </h3>
+      <h3> {{ __('permissions.Create permission:')}} </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('permission.update', $permission->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Edit permission: </h3>
+      <h3> {{ __('permissions.Edit permission:')}} </h3>
 @endif
       <a href="{{ route('permission.index') }}" class="btn btn-primary">
         Back
