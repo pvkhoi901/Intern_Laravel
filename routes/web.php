@@ -7,7 +7,8 @@ use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\PermissionGroup\PermissionGroupController;
-
+use App\Http\Controllers\Lang\LanguageController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +38,5 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('lang/{lang}',[LanguageController::class, 'changeLang'])->name('lang')->middleware('lang');
+

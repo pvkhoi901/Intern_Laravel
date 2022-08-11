@@ -1,16 +1,16 @@
 @extends('layout.admin.master')
 @section('content')
             <div>
-                <h1>Category List</h1>
-                <a href="{{route('category.create')}}" class="btn btn-new">+Addnew</a>
+                <h1>{{ __('category.Category List')}}</h1>
+                <a href="{{route('category.create')}}" class="btn btn-new">{{ __('category.+Addnew')}}</a>
             </div>
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Category_id</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Admin</th>
+                    <th scope="col">{{ __('category.Category_id')}}</th>
+                    <th scope="col">{{ __('category.Name')}}</th>
+                    <th scope="col">{{ __('category.Description')}}</th>
+                    <th scope="col">{{ __('category.Action')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -18,29 +18,9 @@
                     <td>1</td>
                     <td>Aza</td>
                     <td>Hoa</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
+                    <td><button type="button" class="btn btn-primary">{{ __('category.Edit')}}</button> <button type="button" class="btn btn-danger">{{ __('category.Delete')}}</button></td>
                   </tr>
-                    <td>2</td>
-                    <td>Thorn</td>
-                    <td>Qua</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td>3</td>
-                    <td>Wish</td>
-                    <td>Chuoi</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td>4</td>
-                    <td>Aya</td>
-                    <td>banh</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-                    <td>5</td>
-                    <td>Home</td>
-                    <td>Keo</td>
-                    <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-                  </tr>
-
+                    
                 </tbody>
               </table>
 @endsection

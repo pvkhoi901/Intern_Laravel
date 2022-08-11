@@ -6,14 +6,14 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Create permission: </h3>
+      <h3> {{ __('permissions.Create permission:')}} </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('permission.update', $permission->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Edit permission: </h3>
+      <h3> {{ __('permissions.Edit permission:')}} </h3>
 @endif
       <a href="{{ route('permission.index') }}" class="btn btn-primary">
         Back
@@ -27,7 +27,7 @@
   </div>
   @endif
   <div class="container-fluid">
-    <label for="name" class="form-label"> Name </label>
+    <label for="name" class="form-label"> {{ __('permissions.Name')}} </label>
     <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" value="{{ old('name', $permission->name ?? '') }}">
     @error('name')
       <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
     @enderror
   </div>
   <div class="container-fluid">
-    <label for="key" class="form-label"> Key </label>
+    <label for="key" class="form-label"> {{ __('permissions.Key')}} </label>
     <input name="key" type="text" class="form-control @error('key') is-invalid @enderror" id="key" placeholder="" value="{{ old('key', $permission->key ?? '') }}">
       @error('key')
         <span class="invalid-feedback" role="alert">
@@ -53,10 +53,10 @@
     }
   @endphp
   <div class="container-fluid">
-    <label for="permission_group_id" class="form-label"> Permission Group </label>
+    <label for="permission_group_id" class="form-label"> {{ __('permissions.Permission Group')}} </label>
     <select name="permission_group_id" id="permission_group_id" class="form-select @error('permission_group_id') is-invalid @enderror">
       @if (empty($selected))
-        <option value="" selected disabled hidden> Select a permission group </option>
+        <option value="" selected disabled hidden> {{ __('permissions.Select a permission group')}} </option>
       @endif
       @foreach($permissionGroups as $permissionGroup)
         <option value="{{ $permissionGroup->id }}"{{ ($selected == $permissionGroup->id) ? ' selected' : ''}}> {{ $permissionGroup->name }} </option>
@@ -71,7 +71,7 @@
   <div class="row mt-3">
     <div class="d-flex justify-content-center">
       <button type="submit" class="btn btn-primary">
-        Save
+      {{ __('permissions.Save')}}
       </button>
     </div>
   </div>
