@@ -8,6 +8,8 @@ return [
     "Action" => "Hành động",
     "Edit" => "Sửa",
     "Delete" => "Xóa",
-    "Create permission:" => "Thêm mới quyền"
-    
+    "Create permission:" => "Thêm mới quyền",
+    "Select a permission group" => "Chọn nhóm quyền",
+    "Save" => "Lưu",
+
 ];

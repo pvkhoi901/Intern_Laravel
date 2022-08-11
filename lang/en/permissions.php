@@ -8,7 +8,9 @@ return [
     "Action" => "Action",
     "Edit" => "Edit",
     "Delete" => "Delete",
-    "Edit permission:" => "Chỉnh sửa quyền",
-    "Permission Group" => "Nhóm quyền",
-    "Create permission:" => "Create permission:"
+    "Edit permission:" => "Edit permission:",
+    "Permission Group" => "Permission Group",
+    "Create permission:" => "Create permission:",
+    "Select a permission group" => "Select a permission group",
+    "Save" => "Save",
 ];
