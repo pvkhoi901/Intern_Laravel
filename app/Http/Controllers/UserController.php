@@ -51,7 +51,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->back()->with('message', 'Gửi mail thành công');
+        return redirect()->back()->with('message', 'Email sent successfully');
     }
 
     public function index()
@@ -90,6 +90,6 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         Session::push('users', $request->only(['name', 'email', 'phone', 'address']));
-        return redirect()->route('user.index')->with('message', 'Thêm thành công');
+        return redirect()->route('user.index')->with('message', 'Add successfully');
     }
 }
