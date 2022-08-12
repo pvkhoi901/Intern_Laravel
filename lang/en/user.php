@@ -9,7 +9,6 @@ return [
     "Action" => "Action",
     "Edit" => "Edit",
     "Delete" => "Delete",
-
     "Create user" => "Create user",
     "Back" => "Back",
     "Password" => "Password",

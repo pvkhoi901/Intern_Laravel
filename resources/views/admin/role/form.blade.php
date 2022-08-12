@@ -36,7 +36,7 @@
             <tr>
               <th scope="col">{{ __('role.Id') }}</th>
               <th scope="col">{{ __('role.Name')}}</th>
-              <th scope="col">{{ __('role.Permission count') }}</th>
+              <th scope="col">{{ __('role.Permission Count') }}</th>
               <th scope="col">{{ __('role.Created_at') }}</th>
               <th scope="col">{{ __('role.Updated_at') }}</th>
             </tr>
