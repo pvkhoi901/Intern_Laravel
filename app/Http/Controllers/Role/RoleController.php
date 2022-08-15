@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\RoleRequest;
 use App\Repositories\Admin\Role\RoleRepository;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepository;
-<<<<<<< Updated upstream
 use Illuminate\Support\Facades\DB;
-=======
->>>>>>> Stashed changes
 
 class RoleController extends Controller
 {
