@@ -16,7 +16,7 @@ class BaseRepository implements BaseRepositoryInterface
         return $this->model->all();
     }
 
-    public function paginate(array $input = [], $perPage = 10)
+    public function paginate(array $input = [], $perPage = 2)
     {
         $query = $this->model->query();
 

@@ -105,6 +105,7 @@ class RoleController extends Controller
         DB::beginTransaction();
 
         try {
+            
             $this->roleRepository->findById($id)->permissions()->detach();
             $this->roleRepository->deleteById($id);
             DB::commit();

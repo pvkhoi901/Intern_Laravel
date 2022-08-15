@@ -4,6 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidateUsername;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -31,26 +32,25 @@ class UserRequest extends FormRequest
                 'not_regex:/^[@#$%&*]/',
                 new ValidateUserName(),
             ],
-            'address' => '',
-            'email' => 'required|email|not_regex:/^[root]/',
-            'password' => 'required|min:8',
-            'facebook' => 'url',
-            'youtube' => 'url'
-
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($this->user),
+            ],
+            'username' => [
+                'required',
+                Rule::unique('users')->ignore($this->user),
+            ],
+            'password' => [
+                'required_with:password_confirmation',
+                'min:8',
+                'max:200',
+                'regex:/^[0-9@#$%&*]+$/',
+                'confirmed',
+            ],
+            'role_ids' => [
+                'required',
+                'array',
+            ],
         ];
-    }
-    public function messages()
-    {
-        return [
-        'name.required' => 'Không được bỏ trống',
-        'name.min' => 'Vui lòng nhập nhiều hơn 2 kí tự',
-        'name.not_regex' => 'Không được nhập kí tự @, #, $, %, &, *',
-        'password.required' => 'Vui lòng nhập mật khẩu',
-        'password.min' => 'Nhập tối thiểu 8 kí tự',
-        'facebook.url' => 'Phải đúng định dạng url',
-        'youtube.url' => 'Phải đúng định dạng url',
-
-
-    ];
     }
 }
