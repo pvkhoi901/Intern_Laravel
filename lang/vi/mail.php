@@ -1,4 +1,5 @@
 <?php
+
 return [
     "Email sent successfully" => "Gửi mail thành công",
     "Send email to user" => "Gửi mail đến người dùng",

@@ -1,4 +1,5 @@
 <?php
+
 return [
     "Permission group list" => "Danh sách nhóm quyền",
     "Create permission group:" => "Thêm mới nhóm quyền",

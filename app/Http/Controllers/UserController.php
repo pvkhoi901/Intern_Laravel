@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use App\Repositories\Admin\Role\RoleRepository;
 use App\Repositories\Admin\User\UserRepository;
@@ -58,7 +57,7 @@ class UserController extends Controller
     }
 
     public function index()
-    { 
+    {
         return view('admin.user.index', [
             'users' => $this->userRepository->with('roles')->paginate(),
         ]);
@@ -159,7 +158,6 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
-            
             $this->userRepository->findById($id)->roles()->detach();
             $this->userRepository->deleteById($id);
             DB::commit();
@@ -177,5 +175,4 @@ class UserController extends Controller
             );
         }
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 return [
     "System" => "Hệ thống",
     "User management" => "Quản lý người dùng",

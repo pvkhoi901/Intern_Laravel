@@ -1,4 +1,5 @@
 <?php
+
 return [
     "Category List" => "Danh sách danh mục",
     "Category_id" => "Mã danh mục",

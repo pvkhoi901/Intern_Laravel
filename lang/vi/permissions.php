@@ -1,4 +1,5 @@
 <?php
+
 return [
     "Permission list" => "Danh sách quyền",
     "+Addnew" => "Thêm mới",
