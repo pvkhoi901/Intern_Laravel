@@ -21,11 +21,31 @@ class User extends Authenticatable implements MustVerifyEmail
         'student' => 2,
     ];
 
-    protected $guarded = [];
+    protected $fillable = [
+        'id',
+        'name',
+        'email',
+        'username',
+        'password',
+        'type',
+        'address',
+        'school_id',
+        'parent_id',
+        'role_id',
+        'verified_at',
+        'closed',
+        'code',
+        'social_type',
+        'social_id',
+        'social_name',
+        'social_nickname',
+        'social_avatar',
+        'description',
+    ];
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'users_roles');
     }
 
     public function school()

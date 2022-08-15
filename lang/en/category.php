@@ -1,4 +1,5 @@
 <?php
+
 return [
     "Category List" => "Category List",
     "Category_id" => "Category_id",
@@ -11,5 +12,5 @@ return [
     "Save" => "Save",
     "Reset" => "Reset",
     "Create Category" => "Create Category",
-   
+
 ];

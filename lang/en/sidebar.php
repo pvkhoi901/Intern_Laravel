@@ -1,4 +1,5 @@
 <?php
+
 return [
     "System" => "System",
     "User management" => "User management",
@@ -7,5 +8,5 @@ return [
     "Permission group management" => "Permission group management",
     "Catalog" => "Catalog",
     "Product management" => "Product management",
-    "Category management" =>"Category management",  
+    "Category management" =>"Category management",
 ];

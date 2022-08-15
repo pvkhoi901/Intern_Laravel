@@ -1,4 +1,5 @@
 <?php
+
 return [
     "Permission group list" => "Permission group list",
     "Create permission group:" => "Create permission group:",

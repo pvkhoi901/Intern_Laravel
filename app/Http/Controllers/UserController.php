@@ -3,31 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UserRequest;
-
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
+use App\Repositories\Admin\Role\RoleRepository;
+use App\Repositories\Admin\User\UserRepository;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use App\Services\MailService;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     protected $mailService;
+    protected $userRepository;
+    protected $roleRepository;
 
-    public function __construct(MailService $mailService)
+    public function __construct(RoleRepository $roleRepository, UserRepository $userRepository, MailService $mailService)
     {
         $this->mailService = $mailService;
+        $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     public function sendMailUserProfile(Request $request)
     {
-        $users = $request->email == 'all' ? collect(Session::get('users')) : collect(Session::get('users'))->where('email', $request->email);
+        $allUser = $this->userRepository->getAll();
+        $users = $request->email == 'all' ? collect($allUser) : collect($allUser)->where('email', $request->email);
 
         $path = public_path('uploads');
         $attachment = $request->file('attachment');
@@ -56,40 +58,121 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = session()->get('users');
         return view('admin.user.index', [
-            'users'=> $users,
+            'users' => $this->userRepository->with('roles')->paginate(),
         ]);
     }
 
     public function formSendMail()
     {
-        $users = Session::get('users');
         return view('admin.mail.index', [
-            'users'=> $users,
+            'users'=> $this->userRepository->getAll(),
         ]);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('admin.user.form');
+        return view('admin.user.form', [
+            'roles' => $this->roleRepository->getAll(),
+            'isShow' => false,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(UserRequest $request)
     {
-        Session::push('users', $request->only(['name', 'email', 'phone', 'address']));
-        return redirect()->route('user.index')->with('message', 'Add successfully');
+        $data = $request->validated();
+        $data['type'] = User::TYPES['admin'];
+        $data['password'] = Hash::make($data['password']);
+
+        DB::beginTransaction();
+
+        try {
+            $user = $this->userRepository->save($data);
+            $user->roles()->sync($request->input('role_ids'));
+            DB::commit();
+
+            return redirect()->route('user.index', $user->id)->with(
+                'success',
+                'Creation completed successfully.'
+            );
+        } catch (\Exception) {
+            DB::rollback();
+
+            return redirect()->back()->with(
+                'error',
+                'Exception Occured. Please try again later.'
+            );
+        }
+    }
+
+    public function show($id)
+    {
+        if (! $user = $this->userRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.user.form', [
+            'user' => $user,
+            'roles' => $this->roleRepository->getAll(),
+            'isShow' => true,
+        ]);
+    }
+
+    public function edit($id)
+    {
+        if (! $user = $this->userRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.user.form', [
+            'user' => $user,
+            'roles' => $this->roleRepository->getAll(),
+            'isShow' => false,
+        ]);
+    }
+    public function update(UserRequest $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = $this->userRepository->save($request->validated(), ['id' => $id]);
+            $user->roles()->sync($request->input('role_ids'));
+            DB::commit();
+
+            return redirect()->route('user.show', $id)->with(
+                'success',
+                'Edit completed successfully.'
+            );
+        } catch (\Exception) {
+            DB::rollback();
+
+            return redirect()->back()->with(
+                'error',
+                'Exception occured. Please try again later.'
+            );
+        }
+    }
+
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $this->userRepository->findById($id)->roles()->detach();
+            $this->userRepository->deleteById($id);
+            DB::commit();
+
+            return redirect()->route('user.index')->with(
+                'success',
+                'Deletion completed successfully.'
+            );
+        } catch (\Exception) {
+            DB::rollback();
+
+            return redirect()->back()->with(
+                'error',
+                'Exception occured. Please try again later'
+            );
+        }
     }
 }
