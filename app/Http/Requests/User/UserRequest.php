@@ -34,6 +34,7 @@ class UserRequest extends FormRequest
             ],
             'email' => [
                 'required',
+                'email',
                 Rule::unique('users')->ignore($this->user),
             ],
             'username' => [
@@ -49,7 +50,6 @@ class UserRequest extends FormRequest
             ],
             'role_ids' => [
                 'required',
-                'array',
             ],
         ];
     }
