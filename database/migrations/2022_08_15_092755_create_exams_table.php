@@ -12,12 +12,13 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions')->onUpdate('cascade')->onDelete('cascade');
-            $table->boolean('correct')->default(false);
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
+            $table->Integer('time');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('exams');
     }
 };
