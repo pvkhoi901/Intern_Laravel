@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -24,17 +25,8 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:2|not_regex:/^[@#$%&*]/',
-            'description' => 'required',
-        ];
-    }
-    public function messages()
-    {
-        return [
-            'title.required' => 'Không được bỏ trống',
-            'title.min' => 'Vui lòng nhập nhiều hơn 2 kí tự',
-            'title.not_regex' => 'Không được nhập kí tự @, #, $, %, &, *',
-            'description.required' => 'Không được bỏ trống',
+            'name' => ['required', Rule::unique('categories')->ignore($this->category)],
+            'slug' => ['required',Rule::unique('categories')->ignore($this->category)],
         ];
     }
 }
