@@ -25,7 +25,32 @@
             </a>
           </div>
         </div>
-        
+        <table class="table">
+          <thead>
+
+            <tr>
+              <th scope="col">{{ __('category.Id')}}</th>
+              <th scope="col">{{ __('category.Name')}}</th>
+              <th scope="col">{{ __('category.Slug')}}</th>
+              <th scope="col">{{ __('category.Created At')}}</th>
+              <th scope="col">{{ __('category.Updated At')}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              @if(!empty($category))
+            <tr>
+              <td>{{$category['id']}}</td>
+              <td>{{$category['name']}}</td>
+              <td>{{$category['slug']}}</td>
+              <td>{{$category['created_at']}}</td>
+              <td>{{$category['updated_at']}}</td>
+            </tr>
+
+            @endif
+            </tr>
+          </tbody>
+        </table>
         <div class="container-fluid">
           <label for="name" class="form-label">{{ __('category.Name')}}  </label>
           <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" value="{{ old('name', $category->name ?? '') }}"  <?php if ((isset($show))) echo 'readonly' ?>>

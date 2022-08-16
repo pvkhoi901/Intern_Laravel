@@ -14,6 +14,7 @@ class CategoryController extends Controller
     {
         $this->categoryRepository = $categoryRepository;
     }
+
     public function index()
     {
         return view('admin.category.index', [
@@ -72,6 +73,9 @@ class CategoryController extends Controller
     {
         $this->categoryRepository->deleteById($id);
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with(
+            'success',
+            'Delete success'
+        );
     }
 }
