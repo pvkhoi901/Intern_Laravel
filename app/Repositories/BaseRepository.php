@@ -37,4 +37,8 @@ class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->destroy($id);
     }
+    public function where($column, $param)
+    {
+        return $this->model->where($column, '=', $param);
+    }
 }

@@ -19,11 +19,11 @@ class Exam extends Model
 
     public function category()
     {
-        return $this->belongTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function questions()
     {
-        return $this->belongToMany(Question::class);
+        return $this->belongsToMany(Question::class);
     }
 }

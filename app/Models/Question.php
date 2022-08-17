@@ -18,11 +18,16 @@ class Question extends Model
 
     public function category()
     {
-        return $this->belongTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function exams()
     {
-        return $this->belongToMany(Exam::class);
+        return $this->belongsToMany(Exam::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
 }
