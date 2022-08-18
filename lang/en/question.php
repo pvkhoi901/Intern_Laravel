@@ -14,6 +14,7 @@ return [
     "Edit" => "Edit",
     "Show" => "Show",
     "Show Question" => "Show Question",
+    "Edit Question" => "Edit Question",
     "Delete" => "Delete",
     "Created_at" => "Created_at",
     "Updated_at" => "Updated_at",

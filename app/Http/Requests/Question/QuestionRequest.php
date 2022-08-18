@@ -30,7 +30,8 @@ class QuestionRequest extends FormRequest
             'required',
                 Rule::exists('categories', 'id'),
             ],
-            'answers' => ['required', 'array']
+            'answers' => ['required', 'array'],
+            'radio-answer' => ['required'],
         ];
     }
 }

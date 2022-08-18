@@ -40,7 +40,7 @@
         <form class="d-inline" method="post" action="{{route('question.destroy', $question->id)}}">
           @csrf
           @method('DELETE')
-          <button type="submit" class="btn btn-danger"> {{ __('question.Delete') }} </button>
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"> {{ __('question.Delete') }} </button>
         </form>
       </td>
       @endforeach

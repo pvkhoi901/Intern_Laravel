@@ -1,7 +1,16 @@
 @extends('layout.admin.master')
 
 @section('content')
-
+@if (Session::has('success'))
+<div class="alert alert-success" role="alert">
+  {{ session('success') }}
+</div>
+@endif
+@if (Session::has('error'))
+<div class="alert alert-danger" role="alert">
+  {{ session('error') }}
+</div>
+@endif
 @if (empty($question))
 <form class="container-fluid" method="post" action="{{ route('question.store') }}">
   @csrf
@@ -19,7 +28,7 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{ __('user.Edit Question') }} </h3>
+      <h3> {{ __('question.Edit Question') }} </h3>
 @endif
       <a href="{{ route('question.index') }}" class="btn btn-primary">
         Back
@@ -55,27 +64,26 @@
       </span>
     @enderror
   </div>
-      @if(!empty($answer))
-      {{dd($answer)}}
         <div>
-            @for($i = 0; $i < 4; $i++) <div class="form-group">
+            @for($i = 0; $i < 4; $i++) 
+            <div class="form-group">
                 <label>{{ __('question.Answer')}} {{$i+1}}</label>
+            </div>
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-11">
-                    <textarea class="form-control " name="answers[]" rows="2" value=""></textarea>
+                    <textarea class="form-control " name="answers[]" rows="2" value="" <?php if ((isset($show))) echo 'readonly' ?>>{{isset($question) ? $question->answers[$i]->content : ''}}</textarea>
                 </div>
                 <div class="col-1" >
-                    <input style="height: 50px;" type="radio"  name="radio-answer" id="radio-{{$i}}" value="{{$i}}" />
+                    <input style="height: 50px;" type="radio"  name="radio-answer" id="radio-{{$i}}" value="{{$i}}" {{( isset($question) && $question->answers[$i]->correct == 1) ? 'checked' : ''}} disable/>
                 </div>
             </div>
             @endfor
         </div>
-      @endif
   @if (!isset($show))
   <div class="row mt-3">
     <div class="d-flex justify-content-center">
       <button type="submit" class="btn btn-primary">
-      {{ __('user.Save') }}
+      {{ __('question.Save') }}
       </button>
     </div>
   </div>
