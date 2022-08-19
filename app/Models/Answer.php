@@ -18,6 +18,6 @@ class Answer extends Model
 
     public function question()
     {
-        return $this->belongTo(Question::class);
+        return $this->belongsTo(Question::class);
     }
 }

@@ -9,4 +9,6 @@ return [
     "Catalog" => "Danh Mục",
     "Product management"=>"Quản lý sản phẩm",
     "Category management"=>"Quản lý danh mục",
+    "Question management" =>"Ngân hàng câu hỏi",
+
 ];
