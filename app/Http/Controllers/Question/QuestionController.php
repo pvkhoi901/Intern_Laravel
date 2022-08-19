@@ -42,20 +42,14 @@ class QuestionController extends Controller
         $data = $request->validated();
 
         DB::beginTransaction();
-
         try {
             $question = $this->questionRepository->save($data);
-            for ($i = 0; $i < count($data['answers']); $i++) {
-                $answers[] = [
-                'content' => $data['answers'][$i],
-                'question_id' => $question->id,
-            ];
-            }
-            foreach ($answers as $key => $answer) {
-                if ($data['radio-answer'] == $key) {
-                    $answer['correct'] = true;
-                }
-                $this->answerRepository->save($answer);
+
+            foreach ($data['answers']['content'] as $key => $answer) {
+                $question->answers()->create([
+                'content' => $answer,
+                'correct' => $key == $data['radio-answer']['correct'],
+            ]);
             }
 
             DB::commit();
@@ -107,20 +101,12 @@ class QuestionController extends Controller
 
         try {
             $question = $this->questionRepository->save($data, ['id' => $id]);
-            for ($i = 0; $i < count($data['answers']); $i++) {
-                $answers[] = [
-                'content' => $data['answers'][$i],
-                'question_id' => $question->id,
-                'correct' => false,
-            ];
-            }
-            $answer_ids = collect($question->answers)->pluck('id');
+            $answers = $question->answers;
             foreach ($answers as $key => $answer) {
-                if ($data['radio-answer'] == $key) {
-                    $answer['correct'] = true;
-                }
-                $this->answerRepository->save($answer, ['id' => $answer_ids[$key]]);
+                $answer->content = $data['answers']['content'][$key];
+                $answer->correct = $key == $data['radio-answer']['correct'];
             }
+            $question->push();
 
             DB::commit();
 
@@ -142,6 +128,7 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $this->questionRepository->deleteById($id);
+
         return redirect()->route('question.index')->with(
             'success',
             'Deleted successfully'

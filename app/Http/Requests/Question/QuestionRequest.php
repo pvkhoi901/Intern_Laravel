@@ -25,13 +25,14 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required'],
+            'content' => 'required',
             'category_id' => [
             'required',
                 Rule::exists('categories', 'id'),
             ],
-            'answers' => ['required', 'array'],
-            'radio-answer' => ['required'],
+            'answers.content' => 'array',
+            'answers.content.*' => 'required',
+            'radio-answer.correct' => 'required',
         ];
     }
 }

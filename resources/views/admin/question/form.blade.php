@@ -37,7 +37,12 @@
   </div>
   <div class="form-group">
     <label>{{ __('question.Content')}}</label>
-    <textarea class="form-control" name="content" rows="3" <?php if ((isset($show))) echo 'readonly' ?>>{{ old('content' , $question->content ?? '') }}</textarea>
+    <textarea class="form-control @error('content') is-invalid @enderror" name="content" rows="3" <?php if ((isset($show))) echo 'readonly' ?>>{{ old('content' , $question->content ?? '') }}</textarea>
+    @error('content')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
   </div>
   
   @php
@@ -71,14 +76,14 @@
             </div>
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-11">
-                    <textarea class="form-control " name="answers[]" rows="2" value="" <?php if ((isset($show))) echo 'readonly' ?>>{{isset($question) ? $question->answers[$i]->content : ''}}</textarea>
+                    <textarea class="form-control @error('answers.content.'.$i) is-invalid @enderror" name="answers[content][]" rows="2" value="" <?php if ((isset($show))) echo 'readonly' ?>>{{isset($question) ? $question->answers[$i]->content : ''}}</textarea>
                 </div>
                 <div class="col-1" >
-                    <input style="height: 50px;" type="radio"  name="radio-answer" id="radio-{{$i}}" value="{{$i}}" {{( isset($question) && $question->answers[$i]->correct == 1) ? 'checked' : ''}} disable/>
+                    <input style="height: 50px;" type="radio"   name="radio-answer[correct]" id="radio-{{$i}}" value="{{$i}}" {{( isset($question) && $question->answers[$i]->correct == 1) ? 'checked' : ''}} disable/>
                 </div>
             </div>
             @endfor
-        </div>
+        </div>   
   @if (!isset($show))
   <div class="row mt-3">
     <div class="d-flex justify-content-center">
