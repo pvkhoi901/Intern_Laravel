@@ -11,7 +11,7 @@
 </div>
 @endif
 <div class="container-fluid">
-    <table class="table table-bordered table-all">
+    <table class="table table-bordered table-all" id="table">
         <div class="row">
             <div class="col-md-7 " style="margin-top: 10px;">
                 <div class="main-right">
@@ -22,14 +22,6 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="main_but" style="height: 40px; float: left;">
-                    <form action="" class="form-inline ">
-                        <div class="form-group ">
-                            <input style="margin-top: 20px; width: 380px;" class="form-control " name="key" placeholder="Search by name..">
-                        </div>
-
-                    </form>
-                </div>
             </div>
         </div>
         <div class="border-top border-primary border-2">
@@ -103,4 +95,11 @@
         </div>
     </table>
 </div>
+<script type="text/javascript" src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#table').DataTable();
+    } );
+</script>
+
 @endsection
