@@ -10,4 +10,5 @@ return [
     "Product management" => "Product management",
     "Category management" =>"Category management",
     "Question management" =>"Question management",
+    "Customer management" =>"Customer management",
 ];
