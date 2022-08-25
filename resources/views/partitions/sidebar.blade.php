@@ -12,6 +12,7 @@
         <li><a href="{{route('product.index')}}">{{ __('sidebar.Product management') }}</a></li>
         <li><a href="{{route('category.index')}}">{{ __('sidebar.Category management') }}</a></li>
         <li><a href="{{route('question.index')}}">{{ __('sidebar.Question management') }}</a></li>
+        <li><a href="{{route('customer.index')}}">{{ __('sidebar.Customer management') }}</a></li>
     </ul>
 
 </div>

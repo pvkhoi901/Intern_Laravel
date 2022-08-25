@@ -8,6 +8,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\PermissionGroup\PermissionGroupController;
 use App\Http\Controllers\Question\QuestionController;
+use App\Http\Controllers\Customer\CustomerController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -30,6 +31,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin.verify'])->group(
     Route::resource('category', CategoryController::class);
     Route::resource('permission-group', PermissionGroupController::class);
     Route::resource('question', QuestionController::class);
+    Route::resource('customer', CustomerController::class);
     Route::get('/formSendMail', [UserController::class, 'formSendMail'])->name('formSendMail');
     Route::post('/send', [UserController::class, 'sendMailUserProfile'])->name('send');
 });
